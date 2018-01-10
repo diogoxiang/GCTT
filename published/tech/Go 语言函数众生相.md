@@ -1,20 +1,20 @@
 # Go 语言函数众生相
 
-### 本文是对匿名函数、高阶函数、闭包、同步、延时（defer）及其他 Go 函数类型或特性的概览。
+### 本文是对匿名函数、高阶函数、闭包、同步、延时及其他 Goalng 函数类型或特性的概览。
 
-![The Zoo of Go Funcs](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/The_zoo_of_go_funcs.png)
+![The Zoo of Go Funcs](http://www.z4a.net/images/2017/11/26/The_zoo_of_go_funcs.png)
 
-> *这篇文章是针对 Go 语言中不同的函数类型或特性的摘要总结。*
+> _这篇文章是针对 Go 语言中不同的函数类型或特性的摘要总结。_
 >
-> *更为深入的探讨我会在近期的文章中进行，因为那需要更多的篇幅。这只是一个开端。*
+> _更为深入的探讨我会在近期的文章中进行，因为那需要更多的篇幅。这只是一个开端。_
 
 ---
 
 ### 命名函数
 
-一个命名函数拥有一个函数名，并且要声明在包级作用域中——*其他函数的外部*
+一个命名函数拥有一个函数名，并且要声明在包级作用域中——_其他函数的外部_
 
-*👉* ***我已经在[另一篇文章](https://blog.learngoprogramming.com/golang-funcs-params-named-result-values-types-pass-by-value-67f4374d9c0a)中对它们进行了完整的介绍***
+_👉_ **_我已经在[另一篇文章](https://blog.learngoprogramming.com/golang-funcs-params-named-result-values-types-pass-by-value-67f4374d9c0a)中对它们进行了完整的介绍_**
 
 ![named Func](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/named_funcs.png)
 
@@ -26,7 +26,7 @@
 
 变参函数可接受任意数量的参数
 
-*👉* ***我已经在[另一篇文章](https://blog.learngoprogramming.com/golang-variadic-funcs-how-to-patterns-369408f19085)中对它们进行了完整的介绍***
+_👉_ **_我已经在[另一篇文章](https://blog.learngoprogramming.com/golang-variadic-funcs-how-to-patterns-369408f19085)中对它们进行了完整的介绍_**
 
 ![Variadic Funcs](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/variadic_funcs.png)
 
@@ -55,7 +55,7 @@ func (c Count) Incr() int {
 func Incr(c Count) int
 ```
 
-![Method](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/methods.png)
+![Method](http://www.z4a.net/images/2017/11/27/methods.png)
 
 <p align="center">原理并不完全如上所示，但你可以像这样来理解</p>
 
@@ -75,7 +75,7 @@ var c Count; c.Incr(); c.Incr()
 
 #### 指针传递（引用传递）
 
-想要改变计数器 c 的值，你需要给 Incr 方法传入 Count 类型指针——``*Count``。
+想要改变计数器 c 的值，你需要给 Incr 方法传入 Count 类型指针——`*Count`。
 
 ```go
 func (c *Count) Incr() int {
@@ -90,7 +90,7 @@ c.Incr(); c.Incur()
 
 ![pointer receiver](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/pointer_receiver.png)
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/hGVJWPIFZG	"receiver")
+[run the code]: https://play.golang.org/p/hGVJWPIFZG "receiver"
 
 <p align="center">在我之前的一些文章中有更多的示例：看<a href="https://blog.learngoprogramming.com/golang-const-type-enums-iota-bc4befd096d3#c320">这里！</a>看<a href="https://blog.learngoprogramming.com/golang-funcs-params-named-result-values-types-pass-by-value-67f4374d9c0a#638f">这里！</a></p>
 
@@ -106,7 +106,7 @@ type Counter interface {
 }
 ```
 
-下面的 onApiHit 函数能使用任何拥有 `Incr() int` 方法的类型：
+下面的 onApiHit 函数能使用任何拥有`Incr() int`方法的类型：
 
 ```go
 func onApiHit(c Counter) {
@@ -124,11 +124,13 @@ onApiHit(&dummyCounter)
 
 ![interface methods](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/interface_funcs.png)
 
-我们在 Count 类型上定义了一个 `Incr() int` 方法，因此 `onApiHit()` 方法可以通过它来增长 counter —— 我将 dummyCounter 的指针传入了 onApiHit，否则这个计数器不会因而增长。
+我们在 Count 类型上定义了一个`Incr() int`方法，因此`onApiHit()`方法可以通过它来增长 counter —— 我将 dummyCounter 的指针传入了 onApiHit，否则这个计数器不会因而增长
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/w0oyZjmdMA	"interface method")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
 
-*接口方法与普通方法的区别在于接口方法更具伸缩性、可扩展性，并且它是松耦合的。你可以利用接口方法在不同的包之间进行各自所需的实现，而不用修改 onApiHit 或是是其他方法的代码*
+[run the code]: https://play.golang.org/p/w0oyZjmdMA "interface method"
+
+_接口方法与普通方法的区别在于接口方法更具伸缩性、可扩展性，并且它是松耦合的。你可以利用接口方法在不同的包之间进行各自所需的实现，而不用修改 onApiHit 或是是其他方法的代码_
 
 ---
 
@@ -174,13 +176,13 @@ Crunch 是一个[可变参数函数](https://blog.learngoprogramming.com/golang-
 func crunch(nums []int, a ...Cruncher) (rnums []int) {
   // 创建一个等价的切片
   rnums = append(rnums, nums...)
-  
+
   for _, f := range a {
     for i, n := range rnums {
       rnums[i] = f(n)
     }
   }
-  
+
   return
 }
 ```
@@ -199,7 +201,9 @@ crunch(nums, mul, add, sub)
 [101 103 105 107 109]
 ```
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/hNSKZAo0p6	"first-class func")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
+
+[run the code]: https://play.golang.org/p/hNSKZAo0p6 "first-class func"
 
 ---
 
@@ -229,7 +233,9 @@ func(energy int) time.Duration
 func(int) time.Duration
 ```
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/-az-2qBr9T	"annoymous func")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
+
+[run the code]: https://play.golang.org/p/-az-2qBr9T "annoymous func"
 
 #### 示例
 
@@ -270,7 +276,9 @@ sub := func(n int) int {
 crunch(nums, mul, add, sub)
 ```
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/iqcumj5cka	"use annoymous func")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
+
+[run the code]: https://play.golang.org/p/iqcumj5cka "use annoymous func"
 
 ---
 
@@ -286,7 +294,7 @@ crunch(nums, mul, add, sub)
 
 ### 闭包
 
-闭包可以记住其上下文环境中所有定义过的变量。闭包的一个好处就是随时可以在其捕获的环境下操作其中的变量——*小心内存泄漏！*
+闭包可以记住其上下文环境中所有定义过的变量。闭包的一个好处就是随时可以在其捕获的环境下操作其中的变量——_小心内存泄漏！_
 
 #### 示例
 
@@ -296,7 +304,7 @@ crunch(nums, mul, add, sub)
 type tokenizer func() (token string, ok bool)
 ```
 
-下面的 split 函数是一个**高阶函数**，它根据指定的分割符来分割一个字符串，然后返回一个可以遍历这个被分割的字符串中所有单词的**闭包**。*这个闭包可以使用 ”token“ 和 ”last“ 两个在其捕获的环境下定义的变量。*
+下面的 split 函数是一个**高阶函数**，它根据指定的分割符来分割一个字符串，然后返回一个可以遍历这个被分割的字符串中所有单词的**闭包**。_这个闭包可以使用”token“和”last“两个在其捕获的环境下定义的变量。_
 
 ![cloure](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/closure.png)
 
@@ -310,7 +318,7 @@ iter := split(sentence, " ")
 for {
   token, ok := iter()
   if !ok { break }
-  
+
   fmt.Println(token)
 }
 ```
@@ -333,7 +341,9 @@ lazy
 dog
 ```
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/AI1_5BkO1d	"closure")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
+
+[run the code]: https://play.golang.org/p/AI1_5BkO1d "closure"
 
 <p align="center">再次提示，这里面有更详细的描述哦~</p>
 
@@ -343,7 +353,7 @@ dog
 
 延时函数只在其父函数返回时被调用。多个延时函数会以栈的形式一个接一个被调用。
 
-*👉* ***我在[另一篇文章](https://blog.learngoprogramming.com/golang-defer-simplified-77d3b2b817ff)中对延时函数有详细介绍***
+_👉_ **_我在[另一篇文章](https://blog.learngoprogramming.com/golang-defer-simplified-77d3b2b817ff)中对延时函数有详细介绍_**
 
 ![defer func](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/defer_funcs.png)
 
@@ -351,9 +361,9 @@ dog
 
 ### 并发函数
 
-`go func()` 会与其他 goroutines 并发执行。
+`go func()`会与其他 goroutines 并发执行。
 
-*goroutine 是一种轻量级的线程机制，它能使你方便快捷的安排并发体系。其中，main 函数在 main-goroutine 中执行。*
+_goroutine 是一种轻量级的线程机制，它能使你方便快捷的安排并发体系。其中，main 函数在 main-goroutine 中执行。_
 
 #### 示例
 
@@ -389,7 +399,9 @@ main: continues...
 main: ends
 ```
 
-[![run the code](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-functions-overview/run_the_code.png)](https://play.golang.org/p/UzbtrKxBna	"concurrent")
+[![run the code]](http://www.z4a.net/images/2017/11/27/run_the_code.png)
+
+[run the code]: https://play.golang.org/p/UzbtrKxBna "concurrent"
 
 ---
 
@@ -408,22 +420,20 @@ func _() {}
 func _() {}
 ```
 
-#### 内联函数
+#### 行内函数
 
-Go 语言的链接器会将函数放置到可执行环境中，以便稍后在运行时调用它。与直接执行代码相比，有时调用函数是一项昂贵的操作。所以，编译器将函数的主体注入调用者函数中。
+Go 语言的连接器会在运行时将函数置于可执行环境以方便后面的调用。相比于直接执行代码，有时候调用函数所需开销会小一些。因此，编译器将函数体直接注入到调用器中。
 
 更多的相关资料请参阅：[这里](https://github.com/golang/proposal/blob/master/design/19348-midstack-inlining.md)、[这里](http://www.agardner.me/golang/garbage/collection/gc/escape/analysis/2015/10/18/go-escape-analysis.html)、[这里](https://medium.com/@felipedutratine/does-golang-inline-functions-b41ee2d743fa)和[这里](https://github.com/golang/go/issues/17373)。
 
 #### 外部函数
 
-如果你省略掉函数体，仅仅进行函数声明，连接器会尝试在任何可能的地方找到这个外部函数。例如：Atan Func在[*这里只进行了声明*](https://github.com/golang/go/blob/dd8dc6f0595ffc2c4951c0ce8ff6b63228effd97/src/pkg/math/atan.go#L54)，而后在[*这里进行了实现*](https://github.com/golang/go/blob/dd8dc6f0595ffc2c4951c0ce8ff6b63228effd97/src/pkg/math/atan_386.s)。
+如果你省略掉函数体，仅仅进行函数声明，连接器会尝试在任何可能的地方找到这个外部函数。例如：Atan Func 在[_这里只进行了声明_](https://github.com/golang/go/blob/dd8dc6f0595ffc2c4951c0ce8ff6b63228effd97/src/pkg/math/atan.go#L54)，而后在[_这里进行了实现_](https://github.com/golang/go/blob/dd8dc6f0595ffc2c4951c0ce8ff6b63228effd97/src/pkg/math/atan_386.s)。
 
 ---
 
 via: https://blog.learngoprogramming.com/go-functions-overview-anonymous-closures-higher-order-deferred-concurrent-6799008dde7b
 
-作者：[Inanc Gumus](https://blog.learngoprogramming.com/@inanc)
-译者：[shockw4ver](https://github.com/shockw4ver)
-校对：[rxcai](https://github.com/rxcai)、[polaris1119](https://github.com/polaris1119)
+作者：[Inanc Gumus](https://blog.learngoprogramming.com/@inanc) 译者：[shockw4ver](https://github.com/shockw4ver) 校对：[rxcai](https://github.com/rxcai)
 
 本文由 [GCTT](https://github.com/studygolang/GCTT) 原创编译，[Go 中文网](https://studygolang.com/) 荣誉推出
