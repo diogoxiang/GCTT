@@ -2,7 +2,7 @@
 
 # 第 16 部分：结构体
 
-欢迎来到 [Golang 系列教程](https://studygolang.com/subject/2)的第 16 个教程。  
+欢迎来到 [Golang 系列教程](https://studygolang.com/subject/2)的第 16 个教程。
 
 ### 什么是结构体？
 
@@ -29,7 +29,7 @@ type Employee struct {
 }
 ```
 
-上面的结构体 `Employee` 称为 **命名的结构体（Named Structure）**。我们创建了名为 `Employee` 的新类型，而它可以用于创建 `Employee` 类型的结构体变量。  
+上面的结构体 `Employee` 称为 **命名的结构体（Named Structure）**。我们创建了名为 `Employee` 的新类型，而它可以用于创建 `Employee` 类型的结构体变量。
 
 声明结构体时也可以不用声明一个新类型，这样的结构体类型称为 **匿名结构体（Anonymous Structure）**。
 
@@ -74,8 +74,9 @@ func main() {
     fmt.Println("Employee 1", emp1)
     fmt.Println("Employee 2", emp2)
 }
-``` 
-[在线运行程序](https://play.golang.org/p/uhPAHeUwvK)  
+```
+
+[在线运行程序](https://play.golang.org/p/uhPAHeUwvK)
 
 在上述程序的第 7 行，我们创建了一个命名的结构体 `Employee`。而在第 15 行，通过指定每个字段名的值，我们定义了结构体变量 `emp1`。字段名的顺序不一定要与声明结构体类型时的顺序相同。在这里，我们改变了 `lastName` 的位置，将其移到了末尾。这样做也不会有任何的问题。
 
@@ -112,7 +113,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/TEMFM3oZiq)  
+[在线运行程序](https://play.golang.org/p/TEMFM3oZiq)
 
 在上述程序的第 3 行，我们定义了一个**匿名结构体变量** `emp3`。上面我们已经提到，之所以称这种结构体是匿名的，是因为它只是创建一个新的结构体变量 `em3`，而没有定义任何结构体类型。
 
@@ -144,7 +145,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/p7_OpVdFXJ)  
+[在线运行程序](https://play.golang.org/p/p7_OpVdFXJ)
 
 该程序定义了 `emp4`，却没有初始化任何值。因此 `firstName` 和 `lastName` 赋值为 string 的零值（`""`）。而 `age` 和 `salary` 赋值为 int 的零值（0）。该程序会输出：
 
@@ -152,7 +153,7 @@ func main() {
 Employee 4 { 0 0}
 ```
 
-当然还可以为某些字段指定初始值，而忽略其他字段。这样，忽略的字段名会赋值为零值。  
+当然还可以为某些字段指定初始值，而忽略其他字段。这样，忽略的字段名会赋值为零值。
 
 ```go
 package main
@@ -175,7 +176,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/w2gPoCnlZ1)  
+[在线运行程序](https://play.golang.org/p/w2gPoCnlZ1)
 
 在上面程序中的第 14 行和第 15 行，我们初始化了 `firstName` 和 `lastName`，而 `age` 和 `salary` 没有进行初始化。因此 `age` 和 `salary` 赋值为零值。该程序会输出：
 
@@ -208,7 +209,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/GPd_sT85IS)  
+[在线运行程序](https://play.golang.org/p/GPd_sT85IS)
 
 上面程序中的 **emp6.firstName** 访问了结构体 `emp6` 的字段 `firstName`。该程序输出：
 
@@ -241,9 +242,9 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/ZEOx10g7nN)  
+[在线运行程序](https://play.golang.org/p/ZEOx10g7nN)
 
-在上面程序中，我们定义了 `emp7`，接着给 `firstName` 和 `lastName` 赋值。该程序会输出：  
+在上面程序中，我们定义了 `emp7`，接着给 `firstName` 和 `lastName` 赋值。该程序会输出：
 
 ```
 Employee 7: {Jack Adams 0 0}
@@ -272,7 +273,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/xj87UCnBtH)  
+[在线运行程序](https://play.golang.org/p/xj87UCnBtH)
 
 在上面程序中，**emp8** 是一个指向结构体 `Employee` 的指针。`(*emp8).firstName` 表示访问结构体 `emp8` 的 `firstName` 字段。该程序会输出：
 
@@ -281,7 +282,7 @@ First Name: Sam
 Age: 55
 ```
 
-**Go 语言允许我们在访问 `firstName` 字段时，可以使用 `emp8.firstName` 来代替显式的解引用 `(*emp8).firstName`**。  
+**Go 语言允许我们在访问 `firstName` 字段时，可以使用 `emp8.firstName` 来代替显式的解引用 `(*emp8).firstName`**。
 
 ```go
 package main
@@ -301,9 +302,10 @@ func main() {
     fmt.Println("Age:", emp8.age)
 }
 ```
-[在线运行程序](https://play.golang.org/p/0ZE265qQ1h)  
 
-在上面的程序中，我们使用 `emp8.firstName` 来访问 `firstName` 字段，该程序会输出：  
+[在线运行程序](https://play.golang.org/p/0ZE265qQ1h)
+
+在上面的程序中，我们使用 `emp8.firstName` 来访问 `firstName` 字段，该程序会输出：
 
 ```
 First Name: Sam
@@ -312,9 +314,9 @@ Age: 55
 
 ### 匿名字段
 
-当我们创建结构体时，字段可以只有类型，而没有字段名。这样的字段称为匿名字段（Anonymous Field）。  
+当我们创建结构体时，字段可以只有类型，而没有字段名。这样的字段称为匿名字段（Anonymous Field）。
 
-以下代码创建一个 `Person` 结构体，它含有两个匿名字段 `string` 和 `int`。  
+以下代码创建一个 `Person` 结构体，它含有两个匿名字段 `string` 和 `int`。
 
 ```go
 type Person struct {  
@@ -323,7 +325,7 @@ type Person struct {
 }
 ```
 
-我们接下来使用匿名字段来编写一个程序。  
+我们接下来使用匿名字段来编写一个程序。
 
 ```go
 package main
@@ -343,11 +345,11 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/YF-DgdVSrC)  
+[在线运行程序](https://play.golang.org/p/YF-DgdVSrC)
 
-在上面的程序中，结构体 `Person` 有两个匿名字段。`p := Person{"Naveen", 50}` 定义了一个 `Person` 类型的变量。该程序输出 `{Naveen 50}`。  
+在上面的程序中，结构体 `Person` 有两个匿名字段。`p := Person{"Naveen", 50}` 定义了一个 `Person` 类型的变量。该程序输出 `{Naveen 50}`。
 
-**虽然匿名字段没有名称，但其实匿名字段的名称就默认为它的类型**。比如在上面的 `Person` 结构体里，虽说字段是匿名的，但 Go 默认这些字段名是它们各自的类型。所以 `Person` 结构体有两个名为 `string` 和 `int` 的字段。  
+**虽然匿名字段没有名称，但其实匿名字段的名称就默认为它的类型**。比如在上面的 `Person` 结构体里，虽说字段是匿名的，但 Go 默认这些字段名是它们各自的类型。所以 `Person` 结构体有两个名为 `string` 和 `int` 的字段。
 
 ```go
 package main
@@ -368,9 +370,10 @@ func main() {
     fmt.Println(p1)
 }
 ```
-[在线运行程序](https://play.golang.org/p/K-fGNxVyiA)  
 
-在上面程序的第 14 行和第 15 行，我们访问了 `Person` 结构体的匿名字段，我们把字段类型作为字段名，分别为 "string" 和 "int"。上面程序的输出如下：  
+[在线运行程序](https://play.golang.org/p/K-fGNxVyiA)
+
+在上面程序的第 14 行和第 15 行，我们访问了 `Person` 结构体的匿名字段，我们把字段类型作为字段名，分别为 "string" 和 "int"。上面程序的输出如下：
 
 ```
 {naveen 50}
@@ -378,7 +381,7 @@ func main() {
 
 ### 嵌套结构体（Nested Structs）
 
-结构体的字段有可能也是一个结构体。这样的结构体称为嵌套结构体。  
+结构体的字段有可能也是一个结构体。这样的结构体称为嵌套结构体。
 
 ```go
 package main
@@ -411,9 +414,9 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/46jkQFdTPO)  
+[在线运行程序](https://play.golang.org/p/46jkQFdTPO)
 
-上面的结构体 `Person` 有一个字段 `address`，而 `address` 也是结构体。该程序输出：  
+上面的结构体 `Person` 有一个字段 `address`，而 `address` 也是结构体。该程序输出：
 
 ```
 Name: Naveen  
@@ -424,7 +427,7 @@ State: Illinois
 
 ### 提升字段（Promoted Fields）
 
-如果是结构体中有匿名的结构体类型字段，则该匿名结构体里的字段就称为提升字段。这是因为提升字段就像是属于外部结构体一样，可以用外部结构体直接访问。我知道这种定义很复杂，所以我们直接研究下代码来理解吧。  
+如果是结构体中有匿名的结构体类型字段，则该匿名结构体里的字段就称为提升字段。这是因为提升字段就像是属于外部结构体一样，可以用外部结构体直接访问。我知道这种定义很复杂，所以我们直接研究下代码来理解吧。
 
 ```go
 type Address struct {  
@@ -470,7 +473,7 @@ func main() {
 }
 ```
 
-[在线运行程序](https://play.golang.org/p/OgeHCJYoEy)  
+[在线运行程序](https://play.golang.org/p/OgeHCJYoEy)
 
 在上面代码中的第 26 行和第 27 行，我们使用了语法 `p.city` 和 `p.state`，访问提升字段 `city` 和 `state` 就像它们是在结构体 `p` 中声明的一样。该程序会输出：
 
@@ -483,13 +486,13 @@ State: Illinois
 
 ### 导出结构体和字段
 
-如果结构体名称以大写字母开头，则它是其他包可以访问的导出类型（Exported Type）。同样，如果结构体里的字段首字母大写，它也能被其他包访问到。  
+如果结构体名称以大写字母开头，则它是其他包可以访问的导出类型（Exported Type）。同样，如果结构体里的字段首字母大写，它也能被其他包访问到。
 
-让我们使用自定义包，编写一个程序来更好地去理解它。  
+让我们使用自定义包，编写一个程序来更好地去理解它。
 
-在你的 Go 工作区的 `src` 目录中，创建一个名为 `structs` 的文件夹。另外在 `structs` 中再创建一个目录 `computer`。  
+在你的 Go 工作区的 `src` 目录中，创建一个名为 `structs` 的文件夹。另外在 `structs` 中再创建一个目录 `computer`。
 
-在 `computer` 目录中，在名为 `spec.go` 的文件中保存下面的程序。  
+在 `computer` 目录中，在名为 `spec.go` 的文件中保存下面的程序。
 
 ```go
 package computer
@@ -517,7 +520,7 @@ func main() {
 }
 ```
 
-包结构如下所示：  
+包结构如下所示：
 
 ```
 src  
@@ -527,9 +530,9 @@ src
         main.go
 ```
 
-在上述程序的第 3 行，我们导入了 `computer` 包。在第 8 行和第 9 行，我们访问了结构体 `Spec` 的两个导出字段 `Maker` 和 `Price`。执行命令 `go install structs` 和 `workspacepath/bin/structs`，运行该程序。  
+在上述程序的第 3 行，我们导入了 `computer` 包。在第 8 行和第 9 行，我们访问了结构体 `Spec` 的两个导出字段 `Maker` 和 `Price`。执行命令 `go install structs` 和 `workspacepath/bin/structs`，运行该程序。
 
-如果我们试图访问未导出的字段 `model`，编译器会报错。将 `main.go` 的内容替换为下面的代码。  
+如果我们试图访问未导出的字段 `model`，编译器会报错。将 `main.go` 的内容替换为下面的代码。
 
 ```go
 package main
@@ -546,7 +549,7 @@ func main() {
 }
 ```
 
-在上面程序的第 10 行，我们试图访问未导出的字段 `model`。如果运行这个程序，编译器会产生错误：**spec.model undefined (cannot refer to unexported field or method model)**。  
+在上面程序的第 10 行，我们试图访问未导出的字段 `model`。如果运行这个程序，编译器会产生错误：**spec.model undefined (cannot refer to unexported field or method model)**。
 
 ### 结构体相等性（Structs Equality）
 
@@ -584,18 +587,19 @@ func main() {
     }
 }
 ```
-[在线运行程序](https://play.golang.org/p/AU1FkdsPk7)  
 
-在上面的代码中，结构体类型 `name` 包含两个 `string` 类型。由于字符串是可比较的，因此可以比较两个 `name` 类型的结构体变量。  
+[在线运行程序](https://play.golang.org/p/AU1FkdsPk7)
 
-上面代码中 `name1` 和 `name2` 相等，而 `name3` 和 `name4` 不相等。该程序会输出：  
+在上面的代码中，结构体类型 `name` 包含两个 `string` 类型。由于字符串是可比较的，因此可以比较两个 `name` 类型的结构体变量。
+
+上面代码中 `name1` 和 `name2` 相等，而 `name3` 和 `name4` 不相等。该程序会输出：
 
 ```
 name1 and name2 are equal  
 name3 and name4 are not equal  
 ```
 
-**如果结构体包含不可比较的字段，则结构体变量也不可比较。**  
+**如果结构体包含不可比较的字段，则结构体变量也不可比较。**
 
 ```go
 package main
@@ -620,11 +624,12 @@ func main() {
     }
 }
 ```
-[在线运行程序](https://play.golang.org/p/T4svXOTYSg)  
 
-在上面代码中，结构体类型 `image` 包含一个 `map` 类型的字段。由于 `map` 类型是不可比较的，因此 `image1` 和 `image2` 也不可比较。如果运行该程序，编译器会报错：**`main.go:18: invalid operation: image1 == image2 (struct containing map[int]int cannot be compared)`**。  
+[在线运行程序](https://play.golang.org/p/T4svXOTYSg)
 
-[github](https://github.com/golangbot/structs) 上有本教程的源代码。  
+在上面代码中，结构体类型 `image` 包含一个 `map` 类型的字段。由于 `map` 类型是不可比较的，因此 `image1` 和 `image2` 也不可比较。如果运行该程序，编译器会报错：**`main.go:18: invalid operation: image1 == image2 (struct containing map[int]int cannot be compared)`**。
+
+[github](https://github.com/golangbot/structs) 上有本教程的源代码。
 
 **下一教程 - 方法**
 
@@ -632,8 +637,6 @@ func main() {
 
 via: https://golangbot.com/structs/
 
-作者：[Nick Coghlan](https://golangbot.com/about/)
-译者：[Noluye](https://github.com/Noluye)
-校对：[polaris1119](https://github.com/polaris1119)
+作者：[Nick Coghlan](https://golangbot.com/about/) 译者：[Noluye](https://github.com/Noluye) 校对：[polaris1119](https://github.com/polaris1119)
 
 本文由 [GCTT](https://github.com/studygolang/GCTT) 原创编译，[Go 中文网](https://studygolang.com/) 荣誉推出
