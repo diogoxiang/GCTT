@@ -4,8 +4,7 @@
 
 ## 介绍
 
-在过去的几个月里，我在几个项目上使用过 Go，尽管我还算不上专家，但是还是有几件事我要感谢 Go：首先，它有一个清晰而简单的语法，我不止一次注意到 Github 开发人员的风格非常接近于旧 C 程序中使用的风格，从理论上讲，Go 似乎吸收了世界上所有语言最好的特性：它有着高级语言的力量，明确的规则使得更简单，即使这些特性有时有一点点的约束力－－就是可以给代码强加一个坚实的逻辑。这是命令式的简单，由大小以位为单位的原始类型组成。但是没有像把字符串当成字符数组那样操作的乏味。然而，我认为这两个非常有用和有趣的功能是 goroutine 和 channels。
-![GoPIC](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/1.jpg)
+在过去的几个月里，我在几个项目上使用过 Go，尽管我还算不上专家，但是还是有几件事我要感谢 Go：首先，它有一个清晰而简单的语法，我不止一次注意到 Github 开发人员的风格非常接近于旧 C 程序中使用的风格，从理论上讲，Go 似乎吸收了世界上所有语言最好的特性：它有着高级语言的力量，明确的规则使得更简单，即使这些特性有时有一点点的约束力－－就是可以给代码强加一个坚实的逻辑。这是命令式的简单，由大小以位为单位的原始类型组成。但是没有像把字符串当成字符数组那样操作的乏味。然而，我认为这两个非常有用和有趣的功能是 goroutine 和 channels。 ![GoPIC](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/1.jpg)
 
 ## 前言
 
@@ -113,14 +112,14 @@ chan<- float64  // can only be used to send float64s
 
 ## Go vs Python
 
-好吧，我是一个 Python 爱好者－我想，因为它在标题中，我不记得. md 各自的源代码在哪里. 所以我决定做一个比较，看看这些神奇的 Go 巧妙的语句如何真正执行。为此，我编写了一个简单的 go-py 程序（[这里](https://github.com/made2591/go-py-benchmark) 是代码），它完成了对随机整数列表的合并排序，可以在单核环境或多核环境中运行。或者，在单个_例程或多个_例程_环境中：这是因为，正如我所说的，go-routine 是一个在 Python 中不可用的概念，比线程更深入。请记住，不止一个 go-routine 可以属于一个单独的线程。相反，从 Python 的角度来看，你只能使用进程，线程以及信号量，锁定，锁等等，但不可能重现完全相同的计算。我的意思是，这是正常的，他们是不同的语言，但他们最后都调用一组系统调用。无论如何，我认为当你运行这种并发性实验时，你可以做的是尽可能地重现一个在逻辑上的等价性的计算。我们从 Go 版本开始。
+好吧，我是一个 Python 爱好者－我想，因为它在标题中，我不记得. md 各自的源代码在哪里. 所以我决定做一个比较，看看这些神奇的 Go 巧妙的语句如何真正执行。为此，我编写了一个简单的 go-py 程序（[这里](https://github.com/made2591/go-py-benchmark) 是代码），它完成了对随机整数列表的合并排序，可以在单核环境或多核环境中运行。或者，在单个*例程或多个*例程\_环境中：这是因为，正如我所说的，go-routine 是一个在 Python 中不可用的概念，比线程更深入。请记住，不止一个 go-routine 可以属于一个单独的线程。相反，从 Python 的角度来看，你只能使用进程，线程以及信号量，锁定，锁等等，但不可能重现完全相同的计算。我的意思是，这是正常的，他们是不同的语言，但他们最后都调用一组系统调用。无论如何，我认为当你运行这种并发性实验时，你可以做的是尽可能地重现一个在逻辑上的等价性的计算。我们从 Go 版本开始。
 
 ### Go 合并排序
 
 Go 和 Python 版本的程序都提供了两个功能：
 
-- 单 routine;
-- 多个前缀数的 routine;
+* 单 routine;
+* 多个前缀数的 routine;
 
 ### 简单的 Go 版本
 
@@ -333,7 +332,6 @@ if __name__ == "__main__":
 	sem = BoundedSemaphore(routinesNumber)
 	merge_sort_parallel_golike(a, sem, responses)
 	a = responses.pop(0)
-
 ```
 
 好吧，让我们从 manager 开始。在主体中初始化的 Manager 对象提供了一个结构来放置调用的响应 - 或多或少类似于 Queue。BoundedSemaphore 扮演着我之前谈到的有界 channel 信号量的角色。信号量是一个比简单的锁更高级的锁机制：它有一个内部的计数器而不是一个锁定标志，并且只有当超过给定数量的线程试图持有信号才会阻塞它。根据信号量的初始化方式，这允许多个线程同时访问相同的代码段：幸运的是，如果你失败了，你可以尝试获得锁定并继续执行－－这起到了前面提到的在 Go 版本中使用的 select 技巧, 通过使用 `blocking = False` 作为 `（bufferedChannel.acquire（blocking = False））` 的参数。有了 join，我模拟了 WaitGroup 的行为，因为我认为这是在继续最后的合并步骤之前同步这两个线程并等待它们结束的标准方式。这里有任何问题么？
@@ -372,22 +370,19 @@ def merge_sort_parallel_fastest(array, concurrentRoutine, threaded):
 
 	# return result
 	return data[0]
-
 ```
 
-而且这个表现更好。问题是使用线程或进程更好？那么，看看我的比较图！
-![比较图１](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/mergesort.png)
-好吧，因为 Python 版本不太好，这是一个只有 Go 系列的图表
-![Go 图](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/gomerge.png)
+而且这个表现更好。问题是使用线程或进程更好？那么，看看我的比较图！ ![比较图１](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/mergesort.png) 好吧，因为 Python 版本不太好，这是一个只有 Go 系列的图表 ![Go 图](https://raw.githubusercontent.com/studygolang/gctt-images/master/go-python/gomerge.png)
 
 ## 结论
 
 Python 糟透了。 Go 完胜。对不起，Python：我爱你。完整的代码可以在这里找到：[go-py-benchmark](https://made2591.github.io/posts/go-py-benchmark)。
 
 谢谢大家的阅读！
+
 <!--<span id = "anchor"> 锚点 </span> [锚点](#anchor)-->
 
-1　<span id = "1"> 这里可以在线获得很多关于 Go talk 的 [幻灯片](https://talks.Go.org/2012/concurrency.slide)！</span>  
+1 　<span id = "1"> 这里可以在线获得很多关于 Go talk 的 [幻灯片](https://talks.Go.org/2012/concurrency.slide)！</span>  
 2.　<span id = "2">[Rob Pike 的课程](https://vimeo.com/49718712)：并发不是并行的。</span>  
 3.　<span id = "3"> 直接来源官方 [FAQ](https://Go.org/doc/faq) 页面。</span>  
 4.　<span id = "4"> 更多信息在 [这里](https://Go.org/ref/spec#Channel_types)。</span>  
@@ -395,12 +390,10 @@ Python 糟透了。 Go 完胜。对不起，Python：我爱你。完整的代码
 6.　<span id = "6"> 看看 [这里](https://gobyexample.com/non-blocking-channel-operations)</span>  
 7.　<span id = "7"> 这里更多关于 [WaitGroup](https://Go.org/pkg/sync/#WaitGroup) 的信息 </span>
 
-----------------
+---
 
 via: https://made2591.github.io/posts/go-py-benchmark
 
-作者：[Matteo Madeddu](https://made2591.github.io/about/)
-译者：[Titanssword](https://github.com/Titanssword)
-校对：[polaris1119](https://github.com/polaris1119)
+作者：[Matteo Madeddu](https://made2591.github.io/about/) 译者：[Titanssword](https://github.com/Titanssword) 校对：[polaris1119](https://github.com/polaris1119)
 
 本文由 [GCTT](https://github.com/studyGo/GCTT) 原创编译，[Go 中文网](https://studyGo.com/) 荣誉推出
