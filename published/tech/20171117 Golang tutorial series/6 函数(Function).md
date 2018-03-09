@@ -38,6 +38,7 @@ func calculateBill(price int, no int) int {
     return totalPrice // 返回总价
 }
 ```
+
 上述函数有两个整型的输入 `price` 和 `no`，返回值 `totalPrice` 为 `price` 和 `no` 的乘积，也是整数类型。
 
 **如果有连续若干个参数，它们的类型一致，那么我们无须一一罗列，只需在最后一个参数后添加该类型。** 例如，`price int, no int` 可以简写为 `price, no int`，所以示例函数也可写成
@@ -87,8 +88,8 @@ Total price is 540
 
 Go 语言支持一个函数可以有多个返回值。我们来写个以矩形的长和宽为输入参数，计算并返回矩形面积和周长的函数 `rectProps`。矩形的面积是长度和宽度的乘积, 周长是长度和宽度之和的两倍。即：
 
-- `面积 = 长 * 宽`
-- `周长 = 2 * ( 长 + 宽 )`
+* `面积 = 长 * 宽`
+* `周长 = 2 * ( 长 + 宽 )`
 
 ```go
 package main
@@ -105,7 +106,7 @@ func rectProps(length, width float64)(float64, float64) {
 
 func main() {  
     area, perimeter := rectProps(10.8, 5.6)
-    fmt.Printf("Area %f Perimeter %f", area, perimeter) 
+    fmt.Printf("Area %f Perimeter %f", area, perimeter)
 }
 ```
 
@@ -135,9 +136,9 @@ func rectProps(length, width float64)(area, perimeter float64) {
 
 ## 空白符
 
-**_** 在 Go 中被用作空白符，可以用作表示任何类型的任何值。
+**\_** 在 Go 中被用作空白符，可以用作表示任何类型的任何值。
 
-我们继续以 `rectProps` 函数为例，该函数计算的是面积和周长。假使我们只需要计算面积，而并不关心周长的计算结果，该怎么调用这个函数呢？这时，空白符 **_** 就上场了。
+我们继续以 `rectProps` 函数为例，该函数计算的是面积和周长。假使我们只需要计算面积，而并不关心周长的计算结果，该怎么调用这个函数呢？这时，空白符 **\_** 就上场了。
 
 下面的程序我们只用到了函数 `rectProps` 的一个返回值 `area`
 
@@ -167,11 +168,10 @@ func main() {
 
 **下个教程 - 包 (Packages)**
 
--------
+---
+
 via: https://golangbot.com/functions/
 
-作者：[Nick Coghlan](https://golangbot.com/about/)
-译者：[Junedayday](https://github.com/Junedayday)
-校对：[Unknwon](https://github.com/Unknwon)、[polaris1119](https://github.com/polaris1119)
+作者：[Nick Coghlan](https://golangbot.com/about/) 译者：[Junedayday](https://github.com/Junedayday) 校对：[Unknwon](https://github.com/Unknwon)、[polaris1119](https://github.com/polaris1119)
 
 本文由 [GCTT](https://github.com/studygolang/GCTT) 原创编译，[Go 中文网](https://studygolang.com/) 荣誉推出
