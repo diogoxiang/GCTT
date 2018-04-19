@@ -35,6 +35,11 @@
 Go 编程语言原生支持并发。Go 使用 [Go 协程](#)（Goroutine） 和信道（Channel）来处理并发。在接下来的教程里，我们还会详细介绍它们。
 
 并发的介绍到此结束。请留下你的反馈和评论。祝你愉快。
+<<<<<<< HEAD:published/tech/20171117 Golang tutorial series/Golang tutorial series Part 20.md
+=======
+
+**上一教程 - [接口 - II](https://studygolang.com/articles/12325)**
+>>>>>>> ec0697848fd389046b0b1c34e871ffad2872f224:published/tech/20171117 Golang tutorial series/Golang tutorial series Part 20: Introduction to Concurrency.md
 
 **下一教程 - [Go 协程](https://studygolang.com/articles/12342)**
 
