@@ -18,7 +18,7 @@
 
 ### 首先写测试
 
-```
+```go
 func TestWallet(t *testing.T) {
 
     wallet := Wallet{}
@@ -44,13 +44,13 @@ func TestWallet(t *testing.T) {
 
 编译器不知道 `Wallet` 是什么，所以让我们告诉它。
 
-```
+```go
 type Wallet struct { }
 ```
 
 现在我们已经生成了自己的钱包，尝试再次运行测试
 
-```
+```go
 ./wallet_test.go:9:8: wallet.Deposit undefined (type Wallet has no field or method Deposit)
 ./wallet_test.go:11:15: wallet.Balance undefined (type Wallet has no field or method Balance)
 ```
@@ -58,7 +58,7 @@ type Wallet struct { }
 正如所料，我们需要定义这些方法以使测试通过。
 
 请记住，只做足够让测试运行的事情。 我们需要确保测试失败时，显示清晰的错误信息。
-```
+```go
 func (w Wallet) Deposit(amount int) {
 
 }
@@ -113,7 +113,7 @@ func (w Wallet) Balance() int {
 
 通过在代码中添加一些 `prints` 来试验一下
 
-```
+```go
 func TestWallet(t *testing.T) {
 
     wallet := Wallet{}
@@ -132,7 +132,7 @@ func TestWallet(t *testing.T) {
 }
 ```
 
-```
+```go
 func (w Wallet) Deposit(amount int) {
     fmt.Println("address of balance in Deposit is", &w.balance)
     w.balance += amount
@@ -149,7 +149,7 @@ address of balance in test is 0xc420012260
 
 我们可以用 *指针* 来解决这个问题。指针让我们 *指向* 某个值，然后修改它。所以，我们不是拿钱包的副本，而是拿一个指向钱包的指针，这样我们就可以改变它。
 
-```
+```go
 func (w *Wallet) Deposit(amount int) {
     w.balance += amount
 }
@@ -173,7 +173,7 @@ Go 允许从现有的类型创建新的类型。
 
 语法是 `type MyName OriginalType`
 
-```
+```go
 type Bitcoin int
 
 type Wallet struct {
@@ -189,7 +189,7 @@ func (w *Wallet) Balance() Bitcoin {
 }
 ```
 
-```
+```go
 func TestWallet(t *testing.T) {
 
     wallet := Wallet{}
@@ -212,7 +212,7 @@ func TestWallet(t *testing.T) {
 
 [让我们实现 Bitcoin 的 Stringer 方法](https://golang.org/pkg/fmt/#Stringer)
 
-```
+```go
 type Stringer interface {
         String() string
 }
@@ -220,7 +220,7 @@ type Stringer interface {
 
 这个接口是在 `fmt` 包中定义的。当使用 `%s` 打印格式化的字符串时，你可以定义此类型的打印方式。
 
-```
+```go
 func (b Bitcoin) String() string {
     return fmt.Sprintf("%d BTC", b)
 }
@@ -229,7 +229,7 @@ func (b Bitcoin) String() string {
 如你所见，在类型别名上创建方法的语法与结构上的语法相同。
 
 接下来，我们需要更新测试中的格式化字符串，以便它们将使用 `String()` 方法。
-```
+```go
   if got != want {
         t.Errorf("got %s want %s", got, want)
     }
@@ -247,7 +247,7 @@ func (b Bitcoin) String() string {
 
 几乎跟 `Deposit()` 相反
 
-```
+```go
 func TestWallet(t *testing.T) {
 
     t.Run("Deposit", func(t *testing.T) {
@@ -287,7 +287,7 @@ func TestWallet(t *testing.T) {
 
 ### 为测试的运行编写最少量的代码并检查失败测试的输出
 
-```
+```go
 func (w *Wallet) Withdraw(amount Bitcoin) {
 
 }
@@ -297,7 +297,7 @@ func (w *Wallet) Withdraw(amount Bitcoin) {
 
 ### 编写足够的代码使其通过
 
-```
+```go
 func (w *Wallet) Withdraw(amount Bitcoin) {
     w.balance -= amount
 }
@@ -307,7 +307,7 @@ func (w *Wallet) Withdraw(amount Bitcoin) {
 
 在我们的测试中有一些重复部分，我们来重构一下。
 
-```
+```go
 func TestWallet(t *testing.T) {
 
     assertBalance := func(t *testing.T, wallet Wallet, want Bitcoin) {
@@ -343,7 +343,7 @@ func TestWallet(t *testing.T) {
 
 ### 先写测试
 
-```
+```go
 t.Run("Withdraw insufficient funds", func(t *testing.T) {
     startingBalance := Bitcoin(20)
     wallet := Wallet{startingBalance}
@@ -403,7 +403,7 @@ func (w *Wallet) Withdraw(amount Bitcoin) error {
 
 让我们为错误检查做一个快速测试的助手方法，以帮助我们的测试读起来更清晰。
 
-```
+```go
 assertError := func(t *testing.T, err error) {
     if err == nil {
         t.Error("wanted an error but didnt get one")
@@ -413,7 +413,7 @@ assertError := func(t *testing.T, err error) {
 
 并且在我们的测试中
 
-```
+```go
 t.Run("Withdraw insufficient funds", func(t *testing.T) {
     wallet := Wallet{Bitcoin(20)}
     err := wallet.Withdraw(Bitcoin(100))
